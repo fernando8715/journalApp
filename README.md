@@ -1,8 +1,8 @@
-# React + Vite
+# React + Vite + redux + redux toolkit + mui para el diseño
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- este proyecto es creado en el desarrollo del curso de React, dirigido por el profesor
+Fernando Herrera, en la plataforma Udemy.
 
-Currently, two official plugins are available:
+- El proyecto implementa redux que es una libreria de JS para manejar estados globales mantenibles y predecibles. Redux puede utilizarse en proyectos con React o con cualquier otra libreria.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- redux toolkit facilita escribir la logica de redux, la cual contiene funciones y paquetes para construir una app con Redux, ayuda a simplificar las tareas de redux, previene errores comunes y hace mas facil escribir aplicaciones con Redux
