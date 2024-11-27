@@ -9,18 +9,22 @@ import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
 import { checkingAuthentication, starGoogleSignIn } from '../../store/auth'
 
+
+const formData = {
+  displayName: 'Fernando Ruiz',
+  email: 'fernando@email.com',
+  password: '123456'
+}
+
 export const LoginPage = () => {
 
   const dispatch = useDispatch();
-  
-  const { status} = useSelector(state => state.auth)
 
-  const { email, password, onInputChange } = useForm({
-    email: 'fernando@email.com',
-    password: '123456'
-  });
+  const { status } = useSelector(state => state.auth)
 
-  const isAuthenticating = useMemo(()=> status === 'checking', [status])
+  const { email, password, onInputChange } = useForm(formData);
+
+  const isAuthenticating = useMemo(() => status === 'checking', [status])
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -61,10 +65,10 @@ export const LoginPage = () => {
           </Grid>
 
           <Grid size={{ xs: 6 }}>
-            <Button 
-              disabled = { isAuthenticating }
-              type='submit' 
-              variant="contained" 
+            <Button
+              disabled={isAuthenticating}
+              type='submit'
+              variant="contained"
               fullWidth
             >Login
             </Button>
@@ -72,7 +76,7 @@ export const LoginPage = () => {
 
           <Grid size={{ xs: 6 }}>
             <Button
-              disabled = { isAuthenticating }
+              disabled={isAuthenticating}
               variant="contained"
               fullWidth
               onClick={() => onGoogleSignIn()}
