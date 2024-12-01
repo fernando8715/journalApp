@@ -7,12 +7,12 @@ import { DisplaySettings, Google } from "@mui/icons-material"
 
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
-import { checkingAuthentication, starGoogleSignIn } from '../../store/auth'
+import { checkingAuthentication, starGoogleSignIn, startSignInWithEmailPassword } from '../../store/auth'
 
 
 const formData = {
   displayName: 'Fernando Ruiz',
-  email: 'fernando@email.com',
+  email: 'jorge@correo.co',
   password: '123456'
 }
 
@@ -29,8 +29,8 @@ export const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    console.log({ email, password });
-    dispatch(checkingAuthentication())
+    // console.log({ email, password });
+    dispatch(startSignInWithEmailPassword({ email, password }));
   }
 
   const onGoogleSignIn = () => {
@@ -50,6 +50,7 @@ export const LoginPage = () => {
               fullWidth
               name='email'
               value={email}
+              onChange={onInputChange}
             />
           </Grid>
 
@@ -61,6 +62,7 @@ export const LoginPage = () => {
               fullWidth
               name='password'
               value={password}
+              onChange={onInputChange}
             />
           </Grid>
 
