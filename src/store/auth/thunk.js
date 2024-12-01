@@ -1,5 +1,5 @@
 import { checkingCredentials, login, logout } from '.'
-import { registerUserWithEmailAndPassword, signInWithGoogle } from '../../firebase/providers';
+import { registerUserWithEmailAndPassword, signInWithEmailPassword, signInWithGoogle } from '../../firebase/providers';
 
 
 export const checkingAuthentication = (email, password) => {
@@ -25,10 +25,26 @@ export const startCreatingUserWithEmailAndPassword = ({ email, password, display
     return async (dispatch) => {
         dispatch(checkingAuthentication());
 
-        const {ok, uid, photoURL, errorMessage} = await registerUserWithEmailAndPassword({ email, password, displayName });
+        const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailAndPassword({ email, password, displayName });
 
-        if( !ok ) return dispatch(logout( {errorMessage} ))
-        
+        if (!ok) return dispatch(logout({ errorMessage }))
+
         dispatch(login(uid, photoURL, email, displayName));
+    }
+}
+
+export const startSignInWithEmailPassword = ({ email, password }) => {
+
+    return async (dispatch) => {
+        dispatch(checkingAuthentication());
+
+        const result = await signInWithEmailPassword({ email, password });
+        console.log(result);
+        
+
+        if (!result.ok) return dispatch(logout(result.errorMessage))
+
+        dispatch(login(result));
+
     }
 }
