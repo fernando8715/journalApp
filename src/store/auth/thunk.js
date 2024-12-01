@@ -20,15 +20,15 @@ export const starGoogleSignIn = () => {
     }
 }
 
-export const startCreatingUserWithEmailAndPassword = ({email, password, displayName}) => {
+export const startCreatingUserWithEmailAndPassword = ({ email, password, displayName }) => {
 
     return async (dispatch) => {
-        dispatch(checkingCredentials());
+        dispatch(checkingAuthentication());
 
-        const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailAndPassword({ email, password, displayName });
+        const {ok, uid, photoURL, errorMessage} = await registerUserWithEmailAndPassword({ email, password, displayName });
 
-        if( !ok ) return dispatch( logout({ errorMessage }));
-
-        dispatch( login( {uid, photoURL, email, displayName} ) );
+        if( !ok ) return dispatch(logout( {errorMessage} ))
+        
+        dispatch(login(uid, photoURL, email, displayName));
     }
 }

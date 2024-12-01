@@ -49,7 +49,7 @@ export const registerUserWithEmailAndPassword = async ({ email, password, displa
         return {
             ok: false,
             errorcode: error.code,
-            errorMessage: error.message
+            errorMessage: (error.message === 'Firebase: Error (auth/email-already-in-use).') ? 'el correo ya esta registrado' : error.message,
         }
     }
 }
