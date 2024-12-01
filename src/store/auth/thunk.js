@@ -14,7 +14,7 @@ export const starGoogleSignIn = () => {
         dispatch(checkingAuthentication());
 
         const result = await signInWithGoogle();
-        if (!result.ok) return dispatch(logout(result.errorMessage));
+        if (!result.ok) return dispatch(logout(result));
 
         dispatch(login(result))
     }
@@ -25,24 +25,24 @@ export const startCreatingUserWithEmailAndPassword = ({ email, password, display
     return async (dispatch) => {
         dispatch(checkingAuthentication());
 
-        const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailAndPassword({ email, password, displayName });
+        const result = await registerUserWithEmailAndPassword({ email, password, displayName });
 
-        if (!ok) return dispatch(logout({ errorMessage }))
+        if (!result.ok) return dispatch(logout(result))
 
-        dispatch(login(uid, photoURL, email, displayName));
+        dispatch(login(result));
     }
 }
 
 export const startSignInWithEmailPassword = ({ email, password }) => {
 
     return async (dispatch) => {
-        dispatch(checkingAuthentication());
+        dispatch(checkingCredentials());
 
         const result = await signInWithEmailPassword({ email, password });
         console.log(result);
-        
 
-        if (!result.ok) return dispatch(logout(result.errorMessage))
+
+        if (!result.ok) return dispatch(logout(result))
 
         dispatch(login(result));
 

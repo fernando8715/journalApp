@@ -2,29 +2,29 @@ import { useMemo } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Grid2 as Grid, Link, TextField, ThemeProvider, Typography } from "@mui/material"
-import { DisplaySettings, Google } from "@mui/icons-material"
+import { Alert, Button, Grid2 as Grid, Link, TextField, Typography } from "@mui/material"
+import { Google } from "@mui/icons-material"
 
 import { AuthLayout } from '../layout/AuthLayout'
 import { useForm } from '../../hooks'
-import { checkingAuthentication, starGoogleSignIn, startSignInWithEmailPassword } from '../../store/auth'
+import { starGoogleSignIn, startSignInWithEmailPassword } from '../../store/auth'
 
 
 const formData = {
-  displayName: 'Fernando Ruiz',
-  email: 'jorge@correo.co',
-  password: '123456'
+  email: '',
+  password: ''
 }
 
 export const LoginPage = () => {
 
   const dispatch = useDispatch();
 
-  const { status } = useSelector(state => state.auth)
+  const { status, errorMessage } = useSelector(state => state.auth);
+  
 
   const { email, password, onInputChange } = useForm(formData);
 
-  const isAuthenticating = useMemo(() => status === 'checking', [status])
+  const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -64,6 +64,13 @@ export const LoginPage = () => {
               value={password}
               onChange={onInputChange}
             />
+          </Grid>
+
+          <Grid 
+            size={{ xs: 12 }}
+            display={!!errorMessage ? '' : 'none'}
+          >
+            <Alert severity='error'>{ errorMessage }</Alert>
           </Grid>
 
           <Grid size={{ xs: 6 }}>
