@@ -1,13 +1,12 @@
+import { AppRouter } from "./router/AppRouter"
 import { AppTheme } from "./theme"
-import { RouterProvider } from "react-router-dom"
-import { AppRouter } from "./routes/AppRouter"
 
 function JournalApp() {
 
   return (
     <>
-      
-      <RouterProvider router={AppRouter} />
+
+      <AppRouter />
       <AppTheme >
 
       </AppTheme>
