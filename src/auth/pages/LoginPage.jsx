@@ -1,11 +1,12 @@
 import { useMemo } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link as RouterLink } from 'react-router-dom'
 
 import { Alert, Button, Grid2 as Grid, Link, TextField, Typography } from "@mui/material"
 import { Google } from "@mui/icons-material"
 
 import { AuthLayout } from '../layout/AuthLayout'
+
 import { useForm } from '../../hooks'
 import { starGoogleSignIn, startSignInWithEmailPassword } from '../../store/auth'
 
@@ -17,10 +18,9 @@ const formData = {
 
 export const LoginPage = () => {
 
-  const dispatch = useDispatch();
-
   const { status, errorMessage } = useSelector(state => state.auth);
-  
+
+  const dispatch = useDispatch(); 
 
   const { email, password, onInputChange } = useForm(formData);
 
@@ -40,7 +40,10 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title='Login'>
-      <form onSubmit={onSubmit}>
+      <form 
+        onSubmit={onSubmit}
+        className='animate__animated animate__fadeIn animate__faster'  
+      >
         <Grid container spacing={2} >
           <Grid size={{ xs: 12 }}>
             <TextField

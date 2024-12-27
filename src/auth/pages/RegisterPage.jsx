@@ -26,7 +26,7 @@ export const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false)
-  
+
   const { status, errorMessage } = useSelector(state => state.auth);
   const isCheckingAutentication = useMemo(() => status === 'checking', [status]);
 
@@ -48,7 +48,10 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title='Crear cuenta'>
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={onSubmit}
+        className='animate__animated animate__fadeIn animate__faster'
+      >
         <Grid container spacing={2} >
           <Grid size={{ xs: 12 }}>
             <TextField
