@@ -8,7 +8,6 @@ function JournalApp() {
 
       <AppRouter />
       <AppTheme >
-        <h1>pagina Entrada JournalApp</h1>
       </AppTheme>
     </>
   )
