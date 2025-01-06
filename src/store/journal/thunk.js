@@ -26,10 +26,8 @@ export const startNewNote = () => {
             console.log(`error agregando nota: ${error}`);
 
         }
-        //! dispatch
         dispatch(addNewNote(newNote));
         dispatch(setActiveNote(newNote));
-        // dispatch(ActiveNote)
     }
 }
 

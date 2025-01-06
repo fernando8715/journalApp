@@ -3,7 +3,7 @@ import React from 'react'
 import { NavBar } from '../components/NavBar'
 import { SideBar } from '../components';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 export const JournalLayout = ({ children }) => {
     return (
