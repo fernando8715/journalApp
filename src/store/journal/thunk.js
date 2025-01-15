@@ -1,8 +1,8 @@
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore/lite'
 import { firebaseDB } from '../../firebase/config';
 
-import { addNewNote, noteUpdated, savingNewNote, setActiveNote, setNotes, setSaving } from './journalSlice';
-import { loadNotes } from './helpers/loadNotes';
+import { addNewNote, noteUpdated, savingNewNote, setActiveNote, setImagesToActiveNote, setNotes, setSaving } from './journalSlice';
+import { loadNotes, uploadFile } from './helpers';
 
 
 export const startNewNote = () => {
@@ -54,9 +54,25 @@ export const startSaveNote = () => {
         delete newNote.id;
 
         const refDoc = doc(firebaseDB, `${uid}/journal/notes/${activeNote.id}`);
-        await setDoc(refDoc, newNote, { merge: true });       
+        await setDoc(refDoc, newNote, { merge: true });
 
         dispatch(noteUpdated(activeNote));
+
+    }
+}
+
+export const startUploadingFiles = (files = []) => {
+    return async (dispatch) => {
+
+        dispatch(setSaving())
+
+        const uploadFilesPromises = [];
+        for (const file of files) {
+            uploadFilesPromises.push(uploadFile(file));
+        }
+
+        const photoUrls = await Promise.all(uploadFilesPromises);
+        dispatch(setImagesToActiveNote(photoUrls)); 
 
     }
 }

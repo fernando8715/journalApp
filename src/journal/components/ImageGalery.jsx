@@ -1,15 +1,19 @@
 import { ImageList, ImageListItem } from "@mui/material";
+import { useSelector } from "react-redux";
 
-export const ImageGalery = () => {
+export const ImageGalery = ({images}) => {
+
+  // const {activeNote} = useSelector(state => state.journal);
+  // const imageUrl = activeNote.imageUrls; 
 
   return (
-    <ImageList sx={{ width:'100%', height: 500 }} cols={5} rowHeight={180}>
-      {itemData.map((item) => (
-        <ImageListItem key={item.img}>
+    <ImageList sx={{ width:'100%', height: 500 }} cols={4} rowHeight={180}>
+      {images?.map((image) => (
+        <ImageListItem key={image}>
           <img
-            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-            alt={item.title}
+            src={`${image}?w=164&h=164&fit=crop&auto=format`}
+            srcSet={`${image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+            alt="Imagen de la nota"
             loading="lazy"
           />
         </ImageListItem>

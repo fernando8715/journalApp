@@ -1,13 +1,13 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useRef } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-import { SaveOutlined } from "@mui/icons-material"
+import { FileUploadOutlined, SaveOutlined } from "@mui/icons-material"
 import { Button, Grid2 as Grid, TextField, Typography } from "@mui/material"
 import Swal from "sweetalert2"
 
 import { ImageGalery } from "../components"
 import { useForm } from "../../hooks"
-import { setActiveNote, startSaveNote } from "../../store/journal"
+import { setActiveNote, startSaveNote, startUploadingFiles } from "../../store/journal"
 
 export const NoteView = () => {
 
@@ -30,10 +30,16 @@ export const NoteView = () => {
         }
     }, [messageSaved]);
 
-
+    const fileInputRef = useRef();
 
     const onSaveNote = () => {
         dispatch(startSaveNote());
+    }
+
+    const onFileInputChange = ({ target }) => {
+        if (target.files.length === 0) return;
+
+        dispatch(startUploadingFiles(target.files))        
     }
 
     return (
@@ -41,10 +47,26 @@ export const NoteView = () => {
             <Grid container direction='row' justifyContent='space-between' alignItems='center' sx={{ mb: 1 }}>
 
                 <Grid>
-                    <Typography fontSize={30} fontWeight='light'>{dateString}</Typography>
+                    <Typography fontSize={25} fontWeight='light'>{dateString}</Typography>
                 </Grid>
 
+                <input
+                    type="file"
+                    multiple
+                    ref={fileInputRef}
+                    onChange={onFileInputChange}
+                    style={{ display: 'none' }}
+                />
+
+
                 <Grid>
+                    <Button
+                        disabled={isSaving}
+                        onClick={() => fileInputRef.current.click()}
+                    >
+                        <FileUploadOutlined />
+                    </Button>
+                   
                     <Button
                         disabled={isSaving}
                         onClick={onSaveNote}
@@ -80,7 +102,7 @@ export const NoteView = () => {
                         variant="filled"
                         placeholder="¿Que sucedio hoy?"
                         minRows={5}
-                        sx={{ border: "none", mb: 1 }}
+                        sx={{ border: "none", mb: 2 }}
                         name="content"
                         value={content}
                         onChange={onInputChange}
@@ -88,7 +110,7 @@ export const NoteView = () => {
                 </Grid>
             </Grid>
 
-            <ImageGalery />
+            <ImageGalery images={activeNote.imageUrls}/>
 
         </>
     )
