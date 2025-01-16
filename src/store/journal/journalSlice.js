@@ -57,15 +57,18 @@ export const journalSlice = createSlice({
           state.isSaving = false; 
         },
 
-        deleteNoteByID: (state, action) => {
-            state
-        },
-
         clearNotesLogout: (state) => {
             state.isSaving = false,
             state.messageSaved = '',
             state.notes = [],
             state.activeNote = null
+        },
+        
+        deleteNoteByID: (state, action) => {
+            state.activeNote = null;
+            state.notes = state.notes.filter(note => note.id !== action.payload)
+            // state.messageSaved = 'nota borrada correctamente';
+            state.isSaving = false; 
         },
 
     },
