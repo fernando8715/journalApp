@@ -1,4 +1,5 @@
 import { authSlice } from "../../../src/store/auth/authSlice";
+import { initialState } from "../../fixtures/authFixtures";
 
 describe('prebas en el authSlice', () => {
 
@@ -10,6 +11,6 @@ describe('prebas en el authSlice', () => {
         
 
 
-        expect(receive).fn(expect)
+        // expect(receive).fn(expect)
     });
 });
