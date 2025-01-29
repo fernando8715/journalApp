@@ -22,7 +22,7 @@ export const notAutenticatedState = {
     email: null,
     displayName: null,
     photoURL: null,
-    errorMessage: '',
+    errorMessage: null,
 }
 
 export const demoUser = {
