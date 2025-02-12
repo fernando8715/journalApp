@@ -24,3 +24,12 @@ export const notAutenticatedState = {
     photoURL: null,
     errorMessage: null,
 }
+
+
+export const demoUser = {
+    uid: 1234,
+    email: 'correo@correo.co',
+    displayName: 'prueba',
+    photoURL: 'http://prueba.jpg',
+    errorMessage: null,
+}
